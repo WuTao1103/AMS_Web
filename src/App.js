@@ -64,7 +64,7 @@ function App() {
             <Toolbar>
               <AndroidIcon sx={{ mr: 2 }} />
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Android设备监控系统
+                Android Device Monitoring System
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.7 }}>
                 v1.0.0

@@ -29,7 +29,7 @@ function Dashboard() {
       const data = await getDevices();
       setDevices(data);
     } catch (err) {
-      setError('无法加载设备列表，请检查网络连接');
+      setError('Unable to load device list, please check your network connection');
       console.error('Failed to fetch devices:', err);
     } finally {
       setLoading(false);
@@ -55,7 +55,7 @@ function Dashboard() {
   if (loading) {
     return (
       <Container sx={{ mt: 4 }}>
-        <LoadingSpinner message="正在加载设备列表..." />
+        <LoadingSpinner message="Loading device list..." />
       </Container>
     );
   }
@@ -65,10 +65,10 @@ function Dashboard() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
         <div>
           <Typography variant="h4" gutterBottom>
-            Android设备监控仪表板
+            Android Device Monitoring Dashboard
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            共 {devices.length} 台设备
+            Total {devices.length} devices
           </Typography>
         </div>
       </Box>
@@ -80,10 +80,10 @@ function Dashboard() {
       {devices.length === 0 && !error ? (
         <Box textAlign="center" py={8}>
           <Typography variant="h6" color="text.secondary" gutterBottom>
-            暂无设备数据
+            No device data available
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            请确保Android设备正在运行监控应用
+            Please ensure Android devices are running the monitoring app
           </Typography>
         </Box>
       ) : (

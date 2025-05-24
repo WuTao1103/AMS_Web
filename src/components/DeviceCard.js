@@ -27,12 +27,12 @@ function DeviceCard({ device }) {
     const now = new Date();
     const diffMinutes = Math.floor((now - lastSeenTime) / (1000 * 60));
     
-    if (diffMinutes < 1) return '在线';
-    if (diffMinutes < 60) return `${diffMinutes}分钟前`;
+    if (diffMinutes < 1) return 'Online';
+    if (diffMinutes < 60) return `${diffMinutes} minutes ago`;
     const diffHours = Math.floor(diffMinutes / 60);
-    if (diffHours < 24) return `${diffHours}小时前`;
+    if (diffHours < 24) return `${diffHours} hours ago`;
     const diffDays = Math.floor(diffHours / 24);
-    return `${diffDays}天前`;
+    return `${diffDays} days ago`;
   };
 
   return (
@@ -47,7 +47,7 @@ function DeviceCard({ device }) {
         
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
           <Typography variant="body2" color="text.secondary">
-            最后活动:
+            Last Active:
           </Typography>
           <Chip 
             label={getStatusText(device.lastSeen)}
@@ -57,7 +57,7 @@ function DeviceCard({ device }) {
         </Box>
         
         <Typography variant="caption" color="text.secondary">
-          {new Date(device.lastSeen).toLocaleString('zh-CN')}
+          {new Date(device.lastSeen).toLocaleString('en-US')}
         </Typography>
       </CardContent>
       
@@ -69,7 +69,7 @@ function DeviceCard({ device }) {
           variant="contained"
           fullWidth
         >
-          查看详情
+          View Details
         </Button>
       </CardActions>
     </Card>

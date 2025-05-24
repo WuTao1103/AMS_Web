@@ -49,7 +49,7 @@ function DeviceDetails() {
       }
       setLoading(false);
     } catch (err) {
-      setError('无法加载设备详情');
+      setError('Unable to load device details');
       setLoading(false);
     }
   };
@@ -75,15 +75,15 @@ function DeviceDetails() {
   const handleBrightnessChangeCommitted = async () => {
     try {
       setCommandLoading(prev => ({ ...prev, brightness: true }));
-      showMessage('info', '正在设置亮度...');
+      showMessage('info', 'Setting brightness...');
       
       await sendCommand(deviceId, 'SET_BRIGHTNESS', { brightness });
-      showMessage('success', `亮度已设置为 ${brightness}%`);
+      showMessage('success', `Brightness set to ${brightness}%`);
       
       // 延迟刷新设备状态
       setTimeout(fetchDeviceDetails, 2000);
     } catch (err) {
-      showMessage('error', '设置亮度失败');
+      showMessage('error', 'Failed to set brightness');
     } finally {
       setCommandLoading(prev => ({ ...prev, brightness: false }));
     }
@@ -93,14 +93,14 @@ function DeviceDetails() {
     try {
       setCommandLoading(prev => ({ ...prev, wifi: true }));
       const newStatus = device.wifi.status === 'ON' ? 'OFF' : 'ON';
-      showMessage('info', `正在${newStatus === 'ON' ? '开启' : '关闭'}WiFi...`);
+      showMessage('info', `Turning ${newStatus === 'ON' ? 'on' : 'off'} WiFi...`);
       
       await sendCommand(deviceId, 'TOGGLE_WIFI', { status: newStatus });
-      showMessage('success', `WiFi${newStatus === 'ON' ? '开启' : '关闭'}命令已发送`);
+      showMessage('success', `WiFi ${newStatus === 'ON' ? 'on' : 'off'} command sent`);
       
       setTimeout(fetchDeviceDetails, 3000);
     } catch (err) {
-      showMessage('error', 'WiFi控制失败');
+      showMessage('error', 'WiFi control failed');
     } finally {
       setCommandLoading(prev => ({ ...prev, wifi: false }));
     }
@@ -110,14 +110,14 @@ function DeviceDetails() {
     try {
       setCommandLoading(prev => ({ ...prev, bluetooth: true }));
       const newStatus = device.bluetooth.status === 'ON' ? 'OFF' : 'ON';
-      showMessage('info', `正在${newStatus === 'ON' ? '开启' : '关闭'}蓝牙...`);
+      showMessage('info', `Turning ${newStatus === 'ON' ? 'on' : 'off'} Bluetooth...`);
       
       await sendCommand(deviceId, 'TOGGLE_BLUETOOTH', { status: newStatus });
-      showMessage('success', `蓝牙${newStatus === 'ON' ? '开启' : '关闭'}命令已发送`);
+      showMessage('success', `Bluetooth ${newStatus === 'ON' ? 'on' : 'off'} command sent`);
       
       setTimeout(fetchDeviceDetails, 3000);
     } catch (err) {
-      showMessage('error', '蓝牙控制失败');
+      showMessage('error', 'Bluetooth control failed');
     } finally {
       setCommandLoading(prev => ({ ...prev, bluetooth: false }));
     }
@@ -126,7 +126,7 @@ function DeviceDetails() {
   if (loading) {
     return (
       <Container sx={{ mt: 4 }}>
-        <LoadingSpinner message="正在加载设备详情..." />
+        <LoadingSpinner message="Loading device details..." />
       </Container>
     );
   }
@@ -150,7 +150,7 @@ function DeviceDetails() {
   if (!device) {
     return (
       <Container sx={{ mt: 4 }}>
-        <Typography>设备不存在</Typography>
+        <Typography>Device not found</Typography>
         <Button component={Link} to="/" startIcon={<ArrowBackIcon />}>
           返回仪表板
         </Button>
@@ -190,7 +190,7 @@ function DeviceDetails() {
               {deviceId}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              最后更新: {new Date(device.lastUpdated).toLocaleString('zh-CN')}
+              Last updated: {new Date(device.lastUpdated).toLocaleString('en-US')}
             </Typography>
           </Paper>
         </Grid>
@@ -217,24 +217,24 @@ function DeviceDetails() {
                   <WifiIcon color="primary" sx={{ mr: 1 }} /> : 
                   <WifiOffIcon color="disabled" sx={{ mr: 1 }} />
                 }
-                <Typography variant="h6">WiFi状态</Typography>
+                <Typography variant="h6">WiFi Status</Typography>
               </Box>
               
               <Divider sx={{ my: 2 }} />
               
               <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                <Typography variant="body2">状态:</Typography>
+                <Typography variant="body2">Status:</Typography>
                 <Chip 
-                  label={device.wifi.status === 'ON' ? '开启' : '关闭'}
+                  label={device.wifi.status === 'ON' ? 'ON' : 'OFF'}
                   color={device.wifi.status === 'ON' ? 'success' : 'default'}
                   size="small"
                 />
               </Box>
               
               <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Typography variant="body2">网络:</Typography>
+                <Typography variant="body2">Network:</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {device.wifi.ssid || '未连接'}
+                  {device.wifi.ssid || 'Not connected'}
                 </Typography>
               </Box>
               
@@ -245,8 +245,8 @@ function DeviceDetails() {
                 disabled={commandLoading.wifi}
                 startIcon={device.wifi.status === 'ON' ? <WifiOffIcon /> : <WifiIcon />}
               >
-                {commandLoading.wifi ? '处理中...' : 
-                 (device.wifi.status === 'ON' ? '关闭WiFi' : '开启WiFi')}
+                {commandLoading.wifi ? 'Processing...' : 
+                 (device.wifi.status === 'ON' ? 'Turn off WiFi' : 'Turn on WiFi')}
               </Button>
             </CardContent>
           </Card>
@@ -261,25 +261,25 @@ function DeviceDetails() {
                   <BluetoothIcon color="primary" sx={{ mr: 1 }} /> : 
                   <BluetoothDisabledIcon color="disabled" sx={{ mr: 1 }} />
                 }
-                <Typography variant="h6">蓝牙状态</Typography>
+                <Typography variant="h6">Bluetooth Status</Typography>
               </Box>
               
               <Divider sx={{ my: 2 }} />
               
               <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                <Typography variant="body2">状态:</Typography>
+                <Typography variant="body2">Status:</Typography>
                 <Chip 
-                  label={device.bluetooth.status === 'ON' ? '开启' : 
-                         device.bluetooth.status === 'OFF' ? '关闭' : '未知'}
+                  label={device.bluetooth.status === 'ON' ? 'ON' : 
+                         device.bluetooth.status === 'OFF' ? 'OFF' : 'Unknown'}
                   color={device.bluetooth.status === 'ON' ? 'success' : 'default'}
                   size="small"
                 />
               </Box>
               
               <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Typography variant="body2">已配对设备:</Typography>
+                <Typography variant="body2">Paired devices:</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {device.bluetooth.pairedDevices} 台
+                  {device.bluetooth.pairedDevices} devices
                 </Typography>
               </Box>
               
@@ -290,8 +290,8 @@ function DeviceDetails() {
                 disabled={commandLoading.bluetooth || device.bluetooth.status === 'Unknown'}
                 startIcon={device.bluetooth.status === 'ON' ? <BluetoothDisabledIcon /> : <BluetoothIcon />}
               >
-                {commandLoading.bluetooth ? '处理中...' : 
-                 (device.bluetooth.status === 'ON' ? '关闭蓝牙' : '开启蓝牙')}
+                {commandLoading.bluetooth ? 'Processing...' : 
+                 (device.bluetooth.status === 'ON' ? 'Turn off Bluetooth' : 'Turn on Bluetooth')}
               </Button>
             </CardContent>
           </Card>
@@ -303,7 +303,7 @@ function DeviceDetails() {
             <CardContent>
               <Box display="flex" alignItems="center" mb={2}>
                 <BrightnessHighIcon color="primary" sx={{ mr: 1 }} />
-                <Typography variant="h6">屏幕亮度</Typography>
+                <Typography variant="h6">Screen Brightness</Typography>
               </Box>
               
               <Divider sx={{ my: 2 }} />
@@ -326,7 +326,7 @@ function DeviceDetails() {
               />
               
               <Typography variant="caption" color="text.secondary" align="center" display="block">
-                拖动滑块调整亮度
+                Drag the slider to adjust brightness
               </Typography>
             </CardContent>
           </Card>
@@ -336,7 +336,7 @@ function DeviceDetails() {
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" gutterBottom>快速操作</Typography>
+              <Typography variant="h6" gutterBottom>Quick Actions</Typography>
               <Divider sx={{ my: 2 }} />
               
               <Grid container spacing={2}>
@@ -348,7 +348,7 @@ function DeviceDetails() {
                     to={`/device/${deviceId}/history`}
                     startIcon={<HistoryIcon />}
                   >
-                    查看历史数据
+                    View History Data
                   </Button>
                 </Grid>
                 
@@ -358,7 +358,7 @@ function DeviceDetails() {
                     fullWidth
                     onClick={() => setBrightness(0)}
                   >
-                    最低亮度
+                    Minimum Brightness
                   </Button>
                 </Grid>
                 
@@ -368,7 +368,7 @@ function DeviceDetails() {
                     fullWidth
                     onClick={() => setBrightness(50)}
                   >
-                    中等亮度
+                    Medium Brightness
                   </Button>
                 </Grid>
                 
@@ -378,7 +378,7 @@ function DeviceDetails() {
                     fullWidth
                     onClick={() => setBrightness(100)}
                   >
-                    最高亮度
+                    Maximum Brightness
                   </Button>
                 </Grid>
               </Grid>
