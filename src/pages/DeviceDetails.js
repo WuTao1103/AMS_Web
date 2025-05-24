@@ -141,7 +141,7 @@ function DeviceDetails() {
           startIcon={<ArrowBackIcon />}
           sx={{ mt: 2 }}
         >
-          返回仪表板
+          Return to Dashboard
         </Button>
       </Container>
     );
@@ -152,7 +152,7 @@ function DeviceDetails() {
       <Container sx={{ mt: 4 }}>
         <Typography>Device not found</Typography>
         <Button component={Link} to="/" startIcon={<ArrowBackIcon />}>
-          返回仪表板
+          Return to Dashboard
         </Button>
       </Container>
     );
@@ -170,7 +170,7 @@ function DeviceDetails() {
               startIcon={<ArrowBackIcon />}
               variant="outlined"
             >
-              返回仪表板
+              Return to Dashboard
             </Button>
             
             <IconButton 
