@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
-function LoadingSpinner({ message = '加载中...' }) {
+function LoadingSpinner({ message = 'loading...' }) {
   return (
     <Box
       display="flex"

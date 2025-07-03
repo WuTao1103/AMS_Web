@@ -14,8 +14,8 @@ function ErrorMessage({ error, onRetry }) {
           )
         }
       >
-        <AlertTitle>错误</AlertTitle>
-        {error || '发生未知错误'}
+        <AlertTitle>Error</AlertTitle>
+        {error || 'An unknown error has occurred.'}
       </Alert>
     </Box>
   );
